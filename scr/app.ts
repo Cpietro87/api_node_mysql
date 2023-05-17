@@ -1,5 +1,7 @@
 import express, { Application} from 'express';
-import IndexRoutes from './routes/index.routes'
+import IndexRoutes from './routes/index.routes';
+import PostRoutes from './routes/post.routes';
+
 
 
  export class App {
@@ -9,6 +11,7 @@ import IndexRoutes from './routes/index.routes'
     constructor(private port?: number | string) {
         this.app = express();
         this.settings();
+        this.middlewares();
         this.router();
     }
 
@@ -16,8 +19,14 @@ import IndexRoutes from './routes/index.routes'
         this.app.set('port', this.port || 3000)
     }
 
+    middlewares() {
+        this.app.use(express.json());
+    }
+
     router(){
         this.app.use(IndexRoutes);
+        this.app.use('/posts',PostRoutes);
+
     }
 
     async listen() {

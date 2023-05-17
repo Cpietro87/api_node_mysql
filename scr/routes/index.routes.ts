@@ -1,10 +1,10 @@
 import { Router } from "express";
-import {  } from "../controllers/index.controller";
+import { indexWelcome } from "../controllers/index.controller";
 
 const router = Router();
 
 router.route('/')
-    .get()
+    .get(indexWelcome);
 
 
 export default router;
